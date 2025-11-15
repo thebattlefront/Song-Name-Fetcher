@@ -1,0 +1,25 @@
+import pygetwindow as gw
+import time
+
+def get_window_title(exe_name):
+    windows = gw.getWindowsWithTitle(exe_name)
+    if windows:
+        return windows[0].title
+    else:
+        return "None"
+
+def write_song(song):
+    file = open("song name.txt", "w")
+    song = song[0:-14] # remove [foobar2000] at end
+    file.write(f"{song}")
+
+exe_name = "foobar2000"
+current_song = "None"
+while True:
+    song = get_window_title(exe_name)
+    if song != current_song:
+        current_song = song
+        write_song(song)
+    else:
+        write_song(current_song)
+    time.sleep(1)
